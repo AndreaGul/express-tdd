@@ -25,7 +25,7 @@ const createSlug = (titolo) =>{
 
 // createSlug dovrebbe ritornare una stringa
 test('createSlug dovrebbe ritornare una stringa',()=>{
-    const slug = createSlug("questa e una stringa");
+    
 
-    expect(()=>{slug= 10}).toThrow();
+    expect(typeof(createSlug("questa e una stringa"))).toBe('string');
 })
