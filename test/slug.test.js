@@ -3,20 +3,10 @@ const { test, expect } = require("@jest/globals");
 
 const posts = require("../posts");
 
-// const creaSlug = (name) => {
-//     const baseSlug = name.replaceAll(' ', '-').toLowerCase().replaceAll('/', '');
-//     const slugs = pizze.map(p => p.slug);
-//     let counter = 1;
-//     let slug = baseSlug;
-//     while(slugs.includes(slug)){
-//         slug = `${baseSlug}-${counter}`;
-//         counter ++;
-//     }
-//     return slug;
-// }
-
 const createSlug = (titolo, posts) => {
-    
+    if(!Array.isArray(posts) || posts.length ===0){
+        throw new Error("Post non passati");
+    }
     if (typeof titolo !== 'string') {
         throw new Error("Il titolo passato non è una stringa");
     }
@@ -75,4 +65,13 @@ test('createSlug dovrebbe lanciare un errore in caso di titolo non presente o fo
     
     expect(() => createSlug(false, posts)).toThrow("Il titolo passato non è una stringa");
     expect(() => createSlug("", posts)).toThrow("Nessun titolo è stato passato");
+})
+
+//createSlug dovrebbe lanciare un errore se manca l'array dei post
+
+
+test('createSlug dovrebbe lanciare un errore in caso di titolo non presente o formato errato', ()=>{
+    
+    expect(() => createSlug("torta paesana", [])).toThrow("Post non passati");
+
 })
