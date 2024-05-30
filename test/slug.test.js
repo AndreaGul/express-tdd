@@ -18,7 +18,7 @@ const createSlug = (titolo) =>{
     if(typeof titolo !== 'string'){
          throw new Error("Il titolo passato non è una stringa");
      }
-    const baseSlug = titolo.replaceAll(' ','-').toLowerCase().replaceAll('/', '');
+    const baseSlug = titolo.toLowerCase().replaceAll(' ','-').replaceAll('/', '');
 
     return baseSlug ;
 }
@@ -35,4 +35,11 @@ test('createSlug dovrebbe ritornare una stringa',()=>{
 test('createSlug dovrebbe ritornare una stringa in lowercase',()=>{
 
     expect(createSlug("QUESTA E UNA STRINGA")).toBe('questa-e-una-stringa')
+})
+
+//createSlug dovrebbe ritornare una stringa con gli spazi sostituiti da -
+
+test('createSlug dovrebbe ritornare una stringa con gli spazi sostituiti da -',()=>{
+
+    expect(createSlug("questa e una stringa")).toBe('questa-e-una-stringa')
 })
