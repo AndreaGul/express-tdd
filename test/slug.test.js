@@ -29,3 +29,10 @@ test('createSlug dovrebbe ritornare una stringa',()=>{
 
     expect(typeof(createSlug("questa e una stringa"))).toBe('string');
 })
+
+//createSlug dovrebbe ritornare una stringa in lowercase
+
+test('createSlug dovrebbe ritornare una stringa in lowercase',()=>{
+
+    expect(createSlug("QUESTA E UNA STRINGA")).toBe('questa-e-una-stringa')
+})
