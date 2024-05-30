@@ -16,13 +16,19 @@ const posts = require("../posts");
 // }
 
 const createSlug = (titolo, posts) => {
+    
     if (typeof titolo !== 'string') {
         throw new Error("Il titolo passato non è una stringa");
+    }
+    if (!titolo.trim()) {
+        throw new Error("Nessun titolo è stato passato");
     }
     const baseSlug = titolo.toLowerCase().replaceAll(' ', '-').replaceAll('/', '');
     const slugs = posts.map(post => post.slug);
     let slug = baseSlug;
     let counter = 1;
+   
+    
     while (slugs.includes(slug)) {
         slug = `${baseSlug}-${counter}`;
         counter++;
@@ -61,3 +67,12 @@ test('createSlug dovrebbe incrementare di 1 lo slug quando esiste già', () => {
     expect(createSlug("torta paesana", posts)).toBe("torta-paesana-1");
     
 });
+
+
+//createSlug dovrebbe lanciare un errore in caso di titolo non presente o formato errato
+
+test('createSlug dovrebbe lanciare un errore in caso di titolo non presente o formato errato', ()=>{
+    
+    expect(() => createSlug(false, posts)).toThrow("Il titolo passato non è una stringa");
+    expect(() => createSlug("", posts)).toThrow("Nessun titolo è stato passato");
+})
